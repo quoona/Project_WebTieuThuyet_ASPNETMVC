@@ -1,0 +1,36 @@
+﻿@model IEnumerable<NovelWeb_SS5.Models.Chuong>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ChuongTrongDetails_1</title>
+</head>
+<body>
+
+    @foreach (var item in Model)
+    {
+        <div class="anime__details__widget">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <ul>
+
+                        <li><span>Số Chương:</span>@Html.DisplayFor(modelItem => item.soChuong)</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <ul>
+
+                        <li><span>Tên Chương:</span><a href="@Url.Action("ChiTietChuong",new { id = item.idChuong})">@Html.DisplayFor(modelItem => item.tenChuong)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

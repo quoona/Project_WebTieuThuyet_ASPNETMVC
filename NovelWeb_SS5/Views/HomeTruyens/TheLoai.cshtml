@@ -1,0 +1,11 @@
+﻿@model List<NovelWeb_SS5.Models.TheLoai>
+
+<li>
+    <a href="@Url.Action("Index","HomeTruyens")">Categories <span class="arrow_carrot-down"></span></a>
+    <ul class="dropdown">
+        @foreach (var item in Model)
+        {
+            <li><a href="@Url.Action("TruyenTheoTheLoai",new { id = item.idTL})">@Html.DisplayFor(x => item.tenLoai)</a></li>
+        }
+    </ul>
+</li>

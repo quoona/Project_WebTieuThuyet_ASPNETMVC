@@ -1,0 +1,79 @@
+﻿@model NovelWeb_SS5.Models.Truyen
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/DetailsTruyens.cshtml";
+}
+
+<div class="col-lg-3">
+    <div class="anime__details__pic set-bg">
+        <img src="~/Areas/Admin/Content/images/@Url.Content(Model.anhDaidien)" style=" height: 440px; width:300px " />
+        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+    </div>
+</div>
+<div class="col-lg-9">
+    <div class="anime__details__text">
+        <div class="anime__details__title">
+            <h3> @Html.DisplayFor(model => model.tenTruyen)</h3>
+            <span>@Html.DisplayFor(model => model.tacGia)</span>
+        </div>
+        <div class="anime__details__rating">
+            <div class="rating">
+                <a href="#"><i class="fa fa-star"></i></a>
+                <a href="#"><i class="fa fa-star"></i></a>
+                <a href="#"><i class="fa fa-star"></i></a>
+                <a href="#"><i class="fa fa-star"></i></a>
+                <a href="#"><i class="fa fa-star-half-o"></i></a>
+            </div>
+            <span>1.029 Votes</span>
+        </div>
+        <p>
+            @Html.Raw(Model.tomTat)
+        </p>
+        <div class="anime__details__widget">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <ul>
+                        <li><span>Tên Truyện:</span> @Html.DisplayFor(model => model.tenTruyen)</li>
+                        <li><span>Thể Loại:</span> @Html.DisplayFor(model => model.TheLoai.tenLoai)</li>
+                        <li><span>Ngày Đăng:</span> @Html.DisplayFor(model => model.ngayDang)</li>
+                        <li><span>Tình Trạng</span> @Html.DisplayFor(model => model.tinhTrang)</li>
+                        <li><span>Tác Giả:</span> @Html.DisplayFor(model => model.tacGia)</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <ul>
+                        <li><span>Scores:</span> 7.31 / 1,515</li>
+                        <li><span>Rating:</span> 8.5 / 161 times</li>
+                        <li><span>Duration:</span> ??/ep</li>
+                        <li><span>Quality:</span> Novel</li>
+                        <li><span>Views:</span> 131,541</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="anime__details__btn">
+            @*<a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>*@
+
+            @*<a href="#" class="watch-btn">
+                    <span>Watch Now</span> <i class="fa fa-angle-right"></i>
+                </a>*@
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-9">
+        <h3 class="text-light">Danh Sách Chương</h3>
+
+        <div class="col-lg-6 col-md-6">
+            <ul>
+                @{
+                    Html.RenderAction("DanhSachChuong", "HomeTruyens");
+                }
+            </ul>
+        </div>
+    </div>
+</div>

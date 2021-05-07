@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WebTieuThuyetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Chuong">
+          <Key>
+            <PropertyRef Name="idChuong" />
+          </Key>
+          <Property Name="idChuong" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="soChuong" Type="nvarchar" MaxLength="50" />
+          <Property Name="tenChuong" Type="nvarchar(max)" />
+          <Property Name="noiDung" Type="nvarchar(max)" />
+          <Property Name="idTruyen" Type="int" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="idCmt" />
+          </Key>
+          <Property Name="idCmt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="noiDungcmt" Type="nvarchar" MaxLength="50" />
+          <Property Name="ngay" Type="datetime" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" />
+          <Property Name="idChuong" Type="int" />
+          <Property Name="idUser" Type="int" />
+        </EntityType>
+        <EntityType Name="PhanQuyen">
+          <Key>
+            <PropertyRef Name="idQuyen" />
+          </Key>
+          <Property Name="idQuyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="loaiQuyen" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TheLoai">
+          <Key>
+            <PropertyRef Name="idTL" />
+          </Key>
+          <Property Name="idTL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenLoai" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Truyen">
+          <Key>
+            <PropertyRef Name="idTruyen" />
+          </Key>
+          <Property Name="idTruyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTL" Type="int" />
+          <Property Name="tenTruyen" Type="nvarchar(max)" />
+          <Property Name="tacGia" Type="nvarchar(max)" />
+          <Property Name="tinhTrang" Type="nvarchar(max)" />
+          <Property Name="anhDaidien" Type="nvarchar(max)" />
+          <Property Name="tomTat" Type="nvarchar(max)" />
+          <Property Name="ngayDang" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="passWord" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="hoTen" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idQuyen" Type="int" />
+        </EntityType>
+        <Association Name="FK_Chuong_Truyen">
+          <End Role="Truyen" Type="Self.Truyen" Multiplicity="0..1" />
+          <End Role="Chuong" Type="Self.Chuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truyen">
+              <PropertyRef Name="idTruyen" />
+            </Principal>
+            <Dependent Role="Chuong">
+              <PropertyRef Name="idTruyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Chuong">
+          <End Role="Chuong" Type="Self.Chuong" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chuong">
+              <PropertyRef Name="idChuong" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="idChuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Truyen_TheLoai">
+          <End Role="TheLoai" Type="Self.TheLoai" Multiplicity="0..1" />
+          <End Role="Truyen" Type="Self.Truyen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheLoai">
+              <PropertyRef Name="idTL" />
+            </Principal>
+            <Dependent Role="Truyen">
+              <PropertyRef Name="idTL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_PhanQuyen">
+          <End Role="PhanQuyen" Type="Self.PhanQuyen" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhanQuyen">
+              <PropertyRef Name="idQuyen" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="idQuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebTieuThuyetModelStoreContainer">
+          <EntitySet Name="Chuong" EntityType="Self.Chuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TheLoai" EntityType="Self.TheLoai" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Truyen" EntityType="Self.Truyen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Chuong_Truyen" Association="Self.FK_Chuong_Truyen">
+            <End Role="Truyen" EntitySet="Truyen" />
+            <End Role="Chuong" EntitySet="Chuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Chuong" Association="Self.FK_Comment_Chuong">
+            <End Role="Chuong" EntitySet="Chuong" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Truyen_TheLoai" Association="Self.FK_Truyen_TheLoai">
+            <End Role="TheLoai" EntitySet="TheLoai" />
+            <End Role="Truyen" EntitySet="Truyen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_PhanQuyen" Association="Self.FK_User_PhanQuyen">
+            <End Role="PhanQuyen" EntitySet="PhanQuyen" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebTieuThuyetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Chuong">
+          <Key>
+            <PropertyRef Name="idChuong" />
+          </Key>
+          <Property Name="idChuong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="soChuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tenChuong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="noiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idTruyen" Type="Int32" />
+          <NavigationProperty Name="Truyen" Relationship="Self.FK_Chuong_Truyen" FromRole="Chuong" ToRole="Truyen" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Chuong" FromRole="Chuong" ToRole="Comment" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="idCmt" />
+          </Key>
+          <Property Name="idCmt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="noiDungcmt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ngay" Type="DateTime" Precision="3" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idChuong" Type="Int32" />
+          <Property Name="idUser" Type="Int32" />
+          <NavigationProperty Name="Chuong" Relationship="Self.FK_Comment_Chuong" FromRole="Comment" ToRole="Chuong" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Comment_User" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="PhanQuyen">
+          <Key>
+            <PropertyRef Name="idQuyen" />
+          </Key>
+          <Property Name="idQuyen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="loaiQuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_PhanQuyen" FromRole="PhanQuyen" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TheLoai">
+          <Key>
+            <PropertyRef Name="idTL" />
+          </Key>
+          <Property Name="idTL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Truyens" Relationship="Self.FK_Truyen_TheLoai" FromRole="TheLoai" ToRole="Truyen" />
+        </EntityType>
+        <EntityType Name="Truyen">
+          <Key>
+            <PropertyRef Name="idTruyen" />
+          </Key>
+          <Property Name="idTruyen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTL" Type="Int32" />
+          <Property Name="tenTruyen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tacGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tinhTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="anhDaidien" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tomTat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ngayDang" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Chuongs" Relationship="Self.FK_Chuong_Truyen" FromRole="Truyen" ToRole="Chuong" />
+          <NavigationProperty Name="TheLoai" Relationship="Self.FK_Truyen_TheLoai" FromRole="Truyen" ToRole="TheLoai" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passWord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idQuyen" Type="Int32" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_User" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="PhanQuyen" Relationship="Self.FK_User_PhanQuyen" FromRole="User" ToRole="PhanQuyen" />
+        </EntityType>
+        <Association Name="FK_Chuong_Truyen">
+          <End Role="Truyen" Type="Self.Truyen" Multiplicity="0..1" />
+          <End Role="Chuong" Type="Self.Chuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truyen">
+              <PropertyRef Name="idTruyen" />
+            </Principal>
+            <Dependent Role="Chuong">
+              <PropertyRef Name="idTruyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Chuong">
+          <End Role="Chuong" Type="Self.Chuong" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chuong">
+              <PropertyRef Name="idChuong" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="idChuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_PhanQuyen">
+          <End Role="PhanQuyen" Type="Self.PhanQuyen" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhanQuyen">
+              <PropertyRef Name="idQuyen" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="idQuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Truyen_TheLoai">
+          <End Role="TheLoai" Type="Self.TheLoai" Multiplicity="0..1" />
+          <End Role="Truyen" Type="Self.Truyen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheLoai">
+              <PropertyRef Name="idTL" />
+            </Principal>
+            <Dependent Role="Truyen">
+              <PropertyRef Name="idTL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbModelsNovelWeb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Chuongs" EntityType="Self.Chuong" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="PhanQuyens" EntityType="Self.PhanQuyen" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TheLoais" EntityType="Self.TheLoai" />
+          <EntitySet Name="Truyens" EntityType="Self.Truyen" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Chuong_Truyen" Association="Self.FK_Chuong_Truyen">
+            <End Role="Truyen" EntitySet="Truyens" />
+            <End Role="Chuong" EntitySet="Chuongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Chuong" Association="Self.FK_Comment_Chuong">
+            <End Role="Chuong" EntitySet="Chuongs" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_PhanQuyen" Association="Self.FK_User_PhanQuyen">
+            <End Role="PhanQuyen" EntitySet="PhanQuyens" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Truyen_TheLoai" Association="Self.FK_Truyen_TheLoai">
+            <End Role="TheLoai" EntitySet="TheLoais" />
+            <End Role="Truyen" EntitySet="Truyens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebTieuThuyetModelStoreContainer" CdmEntityContainer="DbModelsNovelWeb">
+          <EntitySetMapping Name="Chuongs">
+            <EntityTypeMapping TypeName="WebTieuThuyetModel.Chuong">
+              <MappingFragment StoreEntitySet="Chuong">
+                <ScalarProperty Name="idChuong" ColumnName="idChuong" />
+                <ScalarProperty Name="soChuong" ColumnName="soChuong" />
+                <ScalarProperty Name="tenChuong" ColumnName="tenChuong" />
+                <ScalarProperty Name="noiDung" ColumnName="noiDung" />
+                <ScalarProperty Name="idTruyen" ColumnName="idTruyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="WebTieuThuyetModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="idCmt" ColumnName="idCmt" />
+                <ScalarProperty Name="noiDungcmt" ColumnName="noiDungcmt" />
+                <ScalarProperty Name="ngay" ColumnName="ngay" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="idChuong" ColumnName="idChuong" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanQuyens">
+            <EntityTypeMapping TypeName="WebTieuThuyetModel.PhanQuyen">
+              <MappingFragment StoreEntitySet="PhanQuyen">
+                <ScalarProperty Name="idQuyen" ColumnName="idQuyen" />
+                <ScalarProperty Name="loaiQuyen" ColumnName="loaiQuyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WebTieuThuyetModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TheLoais">
+            <EntityTypeMapping TypeName="WebTieuThuyetModel.TheLoai">
+              <MappingFragment StoreEntitySet="TheLoai">
+                <ScalarProperty Name="idTL" ColumnName="idTL" />
+                <ScalarProperty Name="tenLoai" ColumnName="tenLoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Truyens">
+            <EntityTypeMapping TypeName="WebTieuThuyetModel.Truyen">
+              <MappingFragment StoreEntitySet="Truyen">
+                <ScalarProperty Name="idTruyen" ColumnName="idTruyen" />
+                <ScalarProperty Name="idTL" ColumnName="idTL" />
+                <ScalarProperty Name="tenTruyen" ColumnName="tenTruyen" />
+                <ScalarProperty Name="tacGia" ColumnName="tacGia" />
+                <ScalarProperty Name="tinhTrang" ColumnName="tinhTrang" />
+                <ScalarProperty Name="anhDaidien" ColumnName="anhDaidien" />
+                <ScalarProperty Name="tomTat" ColumnName="tomTat" />
+                <ScalarProperty Name="ngayDang" ColumnName="ngayDang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WebTieuThuyetModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="hoTen" ColumnName="hoTen" />
+                <ScalarProperty Name="idQuyen" ColumnName="idQuyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

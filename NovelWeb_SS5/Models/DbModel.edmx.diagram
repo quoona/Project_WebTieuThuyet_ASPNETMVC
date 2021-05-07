@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b847ab2faf2b49b1a6f17054969d68fd" Name="Diagram1">
+        <EntityTypeShape EntityType="WebTieuThuyetModel.Chuong" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebTieuThuyetModel.Comment" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebTieuThuyetModel.PhanQuyen" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebTieuThuyetModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebTieuThuyetModel.TheLoai" Width="1.5" PointX="1.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebTieuThuyetModel.Truyen" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebTieuThuyetModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="WebTieuThuyetModel.FK_Chuong_Truyen" ManuallyRouted="false" />
+        <AssociationConnector Association="WebTieuThuyetModel.FK_Comment_Chuong" ManuallyRouted="false" />
+        <AssociationConnector Association="WebTieuThuyetModel.FK_Comment_User" ManuallyRouted="false" />
+        <AssociationConnector Association="WebTieuThuyetModel.FK_User_PhanQuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="WebTieuThuyetModel.FK_Truyen_TheLoai" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

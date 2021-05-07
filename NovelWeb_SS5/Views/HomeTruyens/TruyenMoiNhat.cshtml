@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NovelWeb_SS5.Models.Truyen>
+
+@*<div class="filter__gallery">
+        @foreach (var item in Model)
+        {
+
+            <div class="product__sidebar__view__item set-bg mix day years">
+                <a class="" href="@Url.Action("TruyenDetails",new { id = item.idTruyen } )">
+                    <img style="height:190px; width:350px;" class="text-center" src="~/Areas/Admin/Content/images/@item.anhDaidien" />
+                </a>
+
+                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                <h5><a href="@Url.Action("TruyenDetails",new { id = item.idTruyen } )">@Html.DisplayFor(model => item.tenTruyen)</a></h5>
+            </div>
+
+        }
+    </div>*@
+<div class="product__sidebar__comment">
+
+    @foreach (var item in Model)
+    {
+        <div class="product__sidebar__comment__item">
+            <div class="product__sidebar__comment__item__pic">
+                <a class="" href="@Url.Action("TruyenDetails",new { id = item.idTruyen } )">
+                    <img style="height:130px; width:90px;" class="text-center" src="~/Areas/Admin/Content/images/@item.anhDaidien" />
+                </a>
+            </div>
+
+            <div class="product__sidebar__comment__item__text">
+                <ul>
+                    <li>Active</li>
+                    <li>Novel</li>
+                </ul>
+                <h5><a href="@Url.Action("TruyenDetails",new { id = item.idTruyen } )">@Html.DisplayFor(model => item.tenTruyen)</a></h5>
+                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+            </div>
+        </div>
+    }
+</div>

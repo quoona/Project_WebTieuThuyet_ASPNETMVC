@@ -1,0 +1,16 @@
+﻿@model NovelWeb_SS5.Models.TheLoai
+
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="@Url.Action("Index","HomeTruyens")"><i class="fa fa-home"></i> Home</a>
+                    <a href="@Url.Action("Index","HomeTruyens")">Categories</a>
+
+                    <a href="#">@Html.DisplayFor(x => x.tenLoai)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

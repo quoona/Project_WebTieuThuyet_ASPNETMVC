@@ -1,0 +1,43 @@
+﻿@model IEnumerable<NovelWeb_SS5.Models.Truyen>
+
+@{
+    ViewBag.Title = "TruyenMoiNhat";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-9">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-sm-3 ">
+                <div class="thumbnail">
+                    <a href="@Url.Action("TruyenDetails",new { id = item.idTruyen } )">
+                        <img style="height:150px; width:100px;" class="text-center" src="~/Areas/Admin/Content/images/@item.anhDaidien" />
+                        <div style="line-height: 2.2rem; margin-bottom: 4px;  margin-top: 6px; height: 44px; overflow: hidden; text-align: center;">@Html.DisplayFor(model => item.tenTruyen)</div>
+                    </a>
+                </div>
+            </div>
+
+        }
+    </div>
+
+    <div class=" col-md-3">
+        <h4>Chương mới cập nhật</h4>
+        @foreach (var item in Model)
+        {
+            <table>
+                <tr>
+
+                    <td>
+                        <a href="@Url.Action("TruyenDetails",new { id = item.idTruyen } )">
+
+                            <div style="line-height: 2.2rem; margin-bottom: 4px;  height: 44px; overflow: hidden; text-align: center;">@Html.DisplayFor(model => item.tenTruyen)</div>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+        }
+    </div>
+</div>

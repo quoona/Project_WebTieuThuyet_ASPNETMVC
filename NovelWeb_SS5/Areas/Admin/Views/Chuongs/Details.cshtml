@@ -1,0 +1,51 @@
+﻿@model NovelWeb_SS5.Models.Chuong
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Chuong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.soChuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soChuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tenChuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenChuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.noiDung)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.noiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Truyen.tenTruyen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Truyen.tenTruyen)
+        </dd>
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idChuong }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

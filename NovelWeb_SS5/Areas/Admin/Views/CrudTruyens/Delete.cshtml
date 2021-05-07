@@ -1,0 +1,81 @@
+﻿@model NovelWeb_SS5.Models.Truyen
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Xóa</h2>
+
+<h3>Xác nhận bạn muốn xóa truyện này?</h3>
+<div>
+    <h4 style="color:palevioletred">@Html.DisplayFor(x => x.tenTruyen)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tenTruyen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenTruyen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tacGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tacGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tinhTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.anhDaidien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.anhDaidien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tomTat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tomTat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngayDang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngayDang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheLoai.tenLoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheLoai.tenLoai)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Trở lại", "Index")
+        </div>
+    }
+</div>

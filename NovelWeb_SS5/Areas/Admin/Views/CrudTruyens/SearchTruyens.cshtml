@@ -1,0 +1,96 @@
+﻿@model IEnumerable<NovelWeb_SS5.Models.Truyen>
+
+@{
+    ViewBag.Title = "SearchTruyens";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Tìm Kiếm Truyện</h2>
+
+<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-auto my-2 my-md-0">
+    @using (Html.BeginForm("SearchTruyens", "CrudTruyens", FormMethod.Get))
+
+    {
+        <div class="input-group">
+
+            @Html.TextBox("searching", "", new { @class = "form-control", @placeholder = "Search for..." })
+
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    }
+</form>
+
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>
+                <p>Tên Truyện</p>
+            </th>
+            <th>
+                <p>Tác Giả</p>
+            </th>
+            <th>
+                <p>Tình Trạng</p>
+            </th>
+            <th>
+                <p>Ảnh Đại Diện</p>
+            </th>
+            <th>
+                <p>Ngày Đăng</p>
+            </th>
+            <th>
+                <p>Thể Loại</p>
+            </th>
+            <th>
+                <p>Phương Thức</p>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3" style="color:red">
+                    Không tìm thấy
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = item.idTruyen })">@Html.DisplayFor(modelItem => item.tenTruyen)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tacGia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tinhTrang)
+                    </td>
+                    <td>
+                        <img style="height:50px; width:50px;" src="~/Areas/Admin/Content/images/@item.anhDaidien" />
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ngayDang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TheLoai.tenLoai)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Create", "CreateChuongs", new { id = item.idTruyen }, new { @class = "btn btn-default" }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.idTruyen }, new { @class = "btn btn-default" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.idTruyen }, new { @class = "btn btn-default" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.idTruyen }, new { @class = "btn btn-default" })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

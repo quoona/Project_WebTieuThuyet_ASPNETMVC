@@ -1,0 +1,64 @@
+﻿@model NovelWeb_SS5.Models.Truyen
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="margin-top:30px">Details</h2>
+
+<div class="row">
+    <div class="col-sm-2">
+
+        <img src="~/Areas/Admin/Content/images/@Url.Content(Model.anhDaidien)" height="208" width="145" />
+        <div style="padding-top: 2em">
+            <div class="btn-group-justified">
+
+                @Html.ActionLink("Thêm Chương", "CreateChuongs", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-1">
+        <p class="text-nowrap"> Tên Truyện:</p>
+        <p>Thể Loại: </p>
+        <p>Tác Giả:</p>
+        <p class="text-nowrap">Tình Trạng:</p>
+        <p class="text-nowrap">Ngày Đăng:</p>
+
+        <p>Tóm Tắt:</p>
+    </div>
+    <div class="col-sm-6">
+
+        <p>
+            @Html.DisplayFor(model => model.tenTruyen)
+        </p>
+        @*ThemTruyenTheoTheLoai*@
+        <p>@Html.DisplayFor(model => model.TheLoai.tenLoai)</p>
+
+        <p>
+            @Html.DisplayFor(model => model.tacGia)
+        </p>
+        <p>
+            @Html.DisplayFor(model => model.tinhTrang)
+        </p>
+        <p>
+            @Html.DisplayFor(model => model.ngayDang)
+        </p>
+        <p>@Html.Raw(Model.tomTat) </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <h3>Danh Sách Chương</h3>
+        @{
+            Html.RenderAction("DanhSachChuong", "CrudTruyens");
+        }
+
+        <div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+    </div>
+</div>

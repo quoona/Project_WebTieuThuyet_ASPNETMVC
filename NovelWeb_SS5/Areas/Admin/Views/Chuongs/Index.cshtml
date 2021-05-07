@@ -1,0 +1,48 @@
+﻿@model IEnumerable<NovelWeb_SS5.Models.Chuong>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.soChuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tenChuong)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Truyen.tenTruyen)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.soChuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenChuong)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Truyen.tenTruyen)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idChuong }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idChuong }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idChuong })
+            </td>
+        </tr>
+    }
+</table>

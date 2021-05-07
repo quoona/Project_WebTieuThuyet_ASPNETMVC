@@ -1,0 +1,12 @@
+﻿@model IEnumerable<NovelWeb_SS5.Models.Comment>
+
+<h2 class="justify-content-center">Chat Room</h2>
+
+@using (Html.BeginForm("PostComment", "HomeTruyens", FormMethod.Post))
+{
+
+    <input type="text" name="CommentText" style="width:100%; height:60px; font-size:20px; margin-top:10px" />
+    <br />
+    <input type="submit" value="Post Comment" class="btn-success" style="margin-top:10px;" />
+
+}

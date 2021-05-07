@@ -1,0 +1,64 @@
+﻿@model PagedList.PagedList<NovelWeb_SS5.Models.Truyen>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Danh Sách Truyện</h2>
+
+<link href="~/Content/bootstrap-readable.css" rel="stylesheet" />
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            <p>Tên Truyện</p>
+        </th>
+        <th>
+            <p>Tác Giả</p>
+        </th>
+        <th>
+            <p>Tình Trạng</p>
+        </th>
+        <th>
+            <p>Ảnh Đại Diện</p>
+        </th>
+        <th>
+            <p>Ngày Đăng</p>
+        </th>
+        <th>
+            <p>Tên Loại</p>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Details", new { id = item.idTruyen})">@Html.DisplayFor(modelItem => item.tenTruyen)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tacGia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tinhTrang)
+            </td>
+            <td>
+                <img style="height:50px; width:50px;" src="~/Areas/Admin/Content/images/@item.anhDaidien" />
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ngayDang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheLoai.tenLoai)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idTruyen }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idTruyen }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idTruyen })
+            </td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("PageListTruyen", new { page, pageSize = Model.PageSize }))
+        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Truyens

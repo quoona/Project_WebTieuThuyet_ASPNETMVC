@@ -1,0 +1,44 @@
+﻿@model IEnumerable<NovelWeb_SS5.Models.Truyen>
+
+@{
+    ViewBag.Title = "TruyenTheoTheLoai";
+    Layout = "~/Views/Shared/Cate.cshtml";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/style.css" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="product__item">
+                        <a href="@Url.Action("TruyenDetails",new { id = item.idTruyen } )">
+                            <img style="height:325px; width:230px;" class="text-center" src="~/Areas/Admin/Content/images/@item.anhDaidien" />
+                            @*<div style="line-height: 2.2rem; margin-bottom: 4px;  margin-top: 6px; height: 44px; overflow: hidden; text-align: center;">@Html.DisplayFor(model => item.tenTruyen)</div>*@
+                        </a>
+                        <div class="product__item__text">
+                            <ul>
+                                <li>Active</li>
+                                <li>Novel</li>
+                            </ul>
+                            <h5><a href="@Url.Action("TruyenDetails",new { id = item.idTruyen } )">@Html.DisplayFor(model => item.tenTruyen)</a></h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+﻿@model NovelWeb_SS5.Models.TheLoaiModel
+@{
+    Layout = null;
+}
+@using (Html.BeginForm("CbTheLoai", "CrudTruyens"))
+{
+    <table>
+
+        @for (int i = 0; i < Model.TheLoaisModel.Count; i++)
+        {
+            if (i % 3 == 0)
+            {
+                @:<tr></tr>
+            }
+            <td>
+                @Html.CheckBoxFor(x => x.TheLoaisModel[i].ischecked, new { @id = Model.TheLoaisModel[i].idTL })
+                @Html.DisplayFor(x => x.TheLoaisModel[i].tenLoai, new { @id = Model.TheLoaisModel[i].idTL })
+                @Html.HiddenFor(x => x.TheLoaisModel[i].idTL, new { @id = Model.TheLoaisModel[i].idTL })
+                @Html.HiddenFor(x => x.TheLoaisModel[i].tenLoai, new { @id = Model.TheLoaisModel[i].idTL })
+            </td>
+        }
+    </table>
+
+}
